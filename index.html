@@ -2,110 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Streamline Video Editor</title>
-    
     <script src="coi-serviceworker.js"></script>
     <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
-    
-    <style>
-        :root {
-            --primary: #6366f1;
-            --bg: #0f172a;
-            --card: #1e293b;
-            --text: #f8fafc;
-        }
-
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            background: var(--card);
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            text-align: center;
-            width: 90%;
-            max-width: 500px;
-        }
-
-        .hidden { display: none; }
-
-        button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.2s;
-            margin-top: 1rem;
-        }
-
-        button:hover {
-            background: #4f46e5;
-            transform: translateY(-2px);
-        }
-
-        #player {
-            margin-top: 1.5rem;
-            border-radius: 8px;
-            background: #000;
-        }
-
-        .status-badge {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            margin-top: 10px;
-        }
-    </style>
+    <title>WebCut Pro</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <div id="home-page">
-            <h1>🎬 Video Gen</h1>
-            <p>Create and export videos directly in your browser.</p>
-            <button id="start-btn">Get Started</button>
+    <nav class="navbar">
+        <div class="logo">WebCut 🎬</div>
+        <div class="nav-links">
+            <button onclick="showPage('home')">Home</button>
+            <button onclick="showPage('editor')">Editor</button>
+            <button onclick="showPage('projects')">My Projects</button>
         </div>
+    </nav>
 
-        <div id="editor-page" class="hidden">
-            <h3>Editor Workspace</h3>
-            <input type="file" id="uploader" accept="video/*, image/*" style="margin-bottom: 10px;">
-            
-            <video id="player" controls width="100%"></video>
-            
-            <p id="status" class="status-badge">Ready to edit</p>
-            <button id="export-btn">Export MP4</button>
-        <div class="card hidden" id="editor-page">
-    <h3>Advanced Editor</h3>
-    <input type="file" id="uploader" accept="video/*, image/*">
-    
-    <div> style="position: relative; margin-top: 15px;">
-        <video id="player" controls width="100%"></video>
-        <div id="overlay-text" style="position: absolute; top: 20%; left: 10%; color: yellow; font-size: 20px; font-weight: bold; pointer-events: none;"></div>
-    </div>
-
-    <div> style="margin-top: 10px;">
-        <input type="text" id="user-text" placeholder="Type something..." style="padding: 5px; border-radius: 5px; border: none;">
-        <button class="btn" onclick="applyText()" style="padding: 5px 15px; font-size: 12px;">Add Text</button>
-    </div>
-
-    <div id="status">Idle</div>
-    <button class="btn" id="export-btn">Generate & Export</button>
+    <section id="page-home" class="page">
+        <div class="hero">
+            <h1>Create magic today.</h1>
+            <button class="main-btn" onclick="showPage('editor')">+ New Project</button>
         </div>
-            
-    
+    </section>
+
+    <section id="page-editor" class="page hidden">
+        <div class="editor-container">
+            <aside class="sidebar">
+                <button title="Media">📁</button>
+                <button title="Text">T</button>
+                <button title="Effects">✨</button>
+                <button title="Audio">🎵</button>
+            </aside>
+
+            <main class="work-area">
+                <div class="preview-panel">
+                    <video id="player" controls></video>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-header">
+                        <span>Timeline</span>
+                        <input type="file" id="uploader" hidden>
+                        <button onclick="document.getElementById('uploader').click()">Import Media</button>
+                        <button id="export-btn" class="export-btn">Export MP4</button>
+                    </div>
+                    <div class="track" id="video-track">
+                        <p id="status">Drop media here to start editing</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <section id="page-projects" class="page hidden">
+        <h2>Your Saved Projects</h2>
+        <p>No projects saved yet.</p>
+    </section>
 
     <script src="script.js"></script>
 </body>
 </html>
+
