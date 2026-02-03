@@ -3,32 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Editor</title>
+    <title>Streamline Video Editor</title>
     
+    <script src="coi-serviceworker.js"></script>
     <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
     
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f8fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .hidden { display: none; }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+        }
+
+        #player {
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            background: #000;
+        }
+
+        .status-badge {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 
-    <section id="home-page">
-        <h1>Online Video Generator</h1>
-        <p>Upload your media to begin.</p>
-        <button onclick="showEditor()">Start Editing</button>
-    </section>
+    <div class="container">
+        <div id="home-page">
+            <h1>🎬 Video Gen</h1>
+            <p>Create and export videos directly in your browser.</p>
+            <button id="start-btn">Get Started</button>
+        </div>
 
-    <section id="editor-page" style="display:none;">
-        <input type="file" id="uploader" accept="video/*, image/*" multiple>
-        
-        <div class="preview-box">
+        <div id="editor-page" class="hidden">
+            <h3>Editor Workspace</h3>
+            <input type="file" id="uploader" accept="video/*, image/*" style="margin-bottom: 10px;">
+            
             <video id="player" controls width="100%"></video>
-            <p id="status">Status: Waiting for files...</p>
+            
+            <p id="status" class="status-badge">Ready to edit</p>
+            <button id="export-btn">Export MP4</button>
         </div>
-
-        <div class="controls">
-            <button id="export-btn">Generate & Export MP4</button>
-        </div>
-    </section>
+    </div>
 
     <script src="script.js"></script>
 </body>
