@@ -86,8 +86,25 @@
             
             <p id="status" class="status-badge">Ready to edit</p>
             <button id="export-btn">Export MP4</button>
-        </div>
+        <div class="card hidden" id="editor-page">
+    <h3>Advanced Editor</h3>
+    <input type="file" id="uploader" accept="video/*, image/*">
+    
+    <div> style="position: relative; margin-top: 15px;">
+        <video id="player" controls width="100%"></video>
+        <div id="overlay-text" style="position: absolute; top: 20%; left: 10%; color: yellow; font-size: 20px; font-weight: bold; pointer-events: none;"></div>
     </div>
+
+    <div> style="margin-top: 10px;">
+        <input type="text" id="user-text" placeholder="Type something..." style="padding: 5px; border-radius: 5px; border: none;">
+        <button class="btn" onclick="applyText()" style="padding: 5px 15px; font-size: 12px;">Add Text</button>
+    </div>
+
+    <div id="status">Idle</div>
+    <button class="btn" id="export-btn">Generate & Export</button>
+        </div>
+            
+    
 
     <script src="script.js"></script>
 </body>
